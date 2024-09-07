@@ -6,7 +6,7 @@ export function Login() {
   const { handleSignIn, handleLogin } = useLogin();  // Desestruturando as funções do hook
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center w-auto h-auto">
       <div className="flex flex-col justify-center items-center rounded-lg bg-gray-800 w-96 p-5">
         <Typography variant="h3" color="white" className="text-center">
           Faça seu login
