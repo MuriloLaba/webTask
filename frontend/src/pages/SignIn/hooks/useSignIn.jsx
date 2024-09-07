@@ -1,7 +1,6 @@
-// src/hooks/useLogin.jsx
 import { useNavigate } from 'react-router-dom';
 
-export const useLogin = () => {
+export const useSignIn = () => {
   const navigate = useNavigate();
 
   // Função para redirecionar para a página de SignIn
@@ -13,7 +12,7 @@ export const useLogin = () => {
   const handleLogin = () => {
     // Adicione a lógica de autenticação aqui, por exemplo:
     // verificar o CPF e senha, chamar uma API, etc.
-    navigate('/DashBoard');
+    console.log('Login realizado!');
   };
 
   return {

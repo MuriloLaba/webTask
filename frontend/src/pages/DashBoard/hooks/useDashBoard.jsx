@@ -1,12 +1,11 @@
-// src/hooks/useLogin.jsx
 import { useNavigate } from 'react-router-dom';
 
-export const useLogin = () => {
+export const useDashBoard = () => {
   const navigate = useNavigate();
 
   // Função para redirecionar para a página de SignIn
   const handleSignIn = () => {
-    navigate('/signin');
+    navigate('/SignIn');
   };
 
   // Função para o botão Entrar (aqui você pode adicionar a lógica de login)
