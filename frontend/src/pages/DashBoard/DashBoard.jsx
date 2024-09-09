@@ -1,14 +1,30 @@
-import React from 'react';
-import { Typography, Input, Button, Card } from '@material-tailwind/react';
-import { useDashBoard } from './hooks/useDashBoard'; 
+import React from "react";
+import { Typography, Card, CardHeader, CardBody } from "@material-tailwind/react";
+import { useDashBoard } from "./hooks/useDashBoard";
 
 export function DashBoard() {
-  const { handleSignIn, handleLogin } = useDashBoard(); 
+  const { handleSignIn, handleLogin } = useDashBoard();
 
   return (
-    <div className="flex justify-center items-center w-auto h-auto ">
-      <Card className='flex w-11/12 bg-blue-gray-900 items-center'>
-          <Typography variant='lead' color='white' >Tarefas</Typography>
+    <div className="mt-8 flex flex-col size-full">
+      <Card className="bg-black">
+        <CardHeader
+          variant="gradient"
+          color="teal"
+          className="relative mb-3 p-1"
+        >
+          <div className="flex items-center justify-center">
+            <Typography variant="h3" color="white" className="select-none">
+              Tarefas
+            </Typography>
+          </div>
+        </CardHeader>
+
+        <CardBody className="flex px-4 pt-0 pb-2 gap-4 overflow-hidden h-[84vh]">
+          <div className="size-full bg-black rounded-xl border-white border flex-col p-4">
+              
+          </div>
+        </CardBody>
       </Card>
     </div>
   );

@@ -9,6 +9,23 @@ module.exports = withMT({
   theme: {
     extend: {},
   },
-  plugins: [],
+  corePlugins: {
+    preflight: true, // Garante que o Preflight está ativado
+  },
+  plugins: [
+    function ({ addBase }) {
+      addBase({
+        'html, body': {
+          margin: 0,
+          padding: 0,
+          height: '100%',
+          width: '100%',
+          overflow: 'hidden', // Impede a rolagem
+        },
+        '*': {
+          boxSizing: 'border-box',
+        },
+      });
+    },
+  ],
 });
-
