@@ -1,9 +1,9 @@
 import React from 'react';
 import { Typography, Input, Button } from '@material-tailwind/react';
-import { useLogin } from './hooks/useLogin';  // Importando o hook personalizado
+import { useLogin } from './hooks/useLogin';
 
 export function Login() {
-  const { handleSignIn, handleLogin } = useLogin();  // Desestruturando as funções do hook
+  const { username, password, setUsername, setPassword, handleSignIn, handleLogin } = useLogin();
 
   return (
     <div className="flex justify-center items-center min-h-screen w-full overflow-hidden">
@@ -13,18 +13,33 @@ export function Login() {
         </Typography>
 
         <div className="w-full my-5">
-          <Input label="CPF" className="text-white" variant="static" color='white' />
+          <Input 
+            label="Nome de usuario" 
+            className="text-white" 
+            variant="static" 
+            color="white"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
 
         <div className="w-full my-5">
-          <Input label="Senha" className="text-white" variant="static" type="password" color='white'/>
+          <Input 
+            label="Senha" 
+            className="text-white" 
+            variant="static" 
+            type="password"
+            color="white"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
 
         <div className="flex gap-4">
           <Button color="white" variant="outlined" onClick={handleSignIn}>
             Cadastrar-se
           </Button>
-          <Button color="white" variant="outlined" onClick={handleLogin}>
+          <Button color="white" variant="outlined" onClick={() => handleLogin(username, password)}>
             Entrar
           </Button>
         </div>

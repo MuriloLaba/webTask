@@ -3,6 +3,8 @@ import { Typography, Input, Button } from '@material-tailwind/react';
 import { useSignIn } from './hooks/useSignIn';
 
 export function SignIn() {
+  const { name, setName, username, setUsername, password, setPassword, handleRegister } = useSignIn();
+
   return (
     <div className="flex justify-center items-center w-screen h-screen">
       <div className="flex flex-col justify-center items-center rounded-lg bg-black w-96 p-5">
@@ -10,37 +12,23 @@ export function SignIn() {
 
         <div className="w-full my-5">
           <Input 
-            label="CPF" 
-            className="text-white" 
-            variant="static"
-            color='white'
-          />
-        </div>
-
-        <div className="w-full my-5">
-          <Input 
             label="Nome" 
             className="text-white" 
             variant="static"
             color='white'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
         <div className="w-full my-5">
           <Input 
-            label="Email" 
+            label="Nome de usuário" 
             className="text-white" 
             variant="static"
-            color='white' 
-          />
-        </div>
-
-        <div className="w-full my-5">
-          <Input 
-            label="Telefone" 
-            className="text-white" 
-            variant="static" 
             color='white'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 
@@ -51,12 +39,16 @@ export function SignIn() {
             variant="static" 
             type='password'
             color='white'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className='flex gap-4'>
-        <Button fullWidth color='white' variant='outlined'>Cadastrar</Button>
-        </div>
 
+        <div className='flex gap-4'>
+          <Button fullWidth color='white' variant='outlined' onClick={handleRegister}>
+            Cadastrar
+          </Button>
+        </div>
       </div>
     </div>
   );
