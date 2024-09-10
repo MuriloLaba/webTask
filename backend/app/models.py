@@ -16,7 +16,7 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text, nullable=True)  # A descrição pode ser vazia
-    status = db.Column(db.String(50), nullable=False, default='Pendente')  # Status padrão: 'Pendente'
+    status = db.Column(db.Integer, nullable=False, default=0)
 
     # Chave estrangeira para associar a tarefa a um usuário
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
