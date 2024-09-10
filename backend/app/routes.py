@@ -134,7 +134,14 @@ def update_task_status(task_id):
         task.status = new_status
         db.session.commit()
 
-        return jsonify({"message": "Status da task atualizado com sucesso!"}), 200
+        # Retorne a tarefa atualizada como JSON
+        return jsonify({
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "status": task.status,
+            "user_id": task.user_id
+        }), 200
     except Exception as e:
         print(f"Erro ao atualizar status da task: {e}")
         return jsonify({"error": "Erro no servidor"}), 500
@@ -158,7 +165,14 @@ def update_task_title(task_id):
         task.title = new_title
         db.session.commit()
 
-        return jsonify({"message": "Título da task atualizado com sucesso!"}), 200
+        # Retorna a tarefa atualizada
+        return jsonify({
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "status": task.status,
+            "user": {"id": task.user.id, "name": task.user.name} if task.user else None
+        }), 200
     except Exception as e:
         print(f"Erro ao atualizar o título da task: {e}")
         return jsonify({"error": "Erro no servidor"}), 500
@@ -179,7 +193,14 @@ def update_task_description(task_id):
         task.description = new_description
         db.session.commit()
 
-        return jsonify({"message": "Descrição da task atualizada com sucesso!"}), 200
+        # Retorna a tarefa atualizada
+        return jsonify({
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "status": task.status,
+            "user": {"id": task.user.id, "name": task.user.name} if task.user else None
+        }), 200
     except Exception as e:
         print(f"Erro ao atualizar a descrição da task: {e}")
         return jsonify({"error": "Erro no servidor"}), 500
@@ -208,7 +229,14 @@ def update_task_user(task_id):
         task.user_id = new_user_id
         db.session.commit()
 
-        return jsonify({"message": "Usuário responsável pela task atualizado com sucesso!"}), 200
+        # Retorna a tarefa atualizada
+        return jsonify({
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "status": task.status,
+            "user": {"id": task.user.id, "name": task.user.name} if task.user else None
+        }), 200
     except Exception as e:
         print(f"Erro ao atualizar o usuário da task: {e}")
         return jsonify({"error": "Erro no servidor"}), 500
