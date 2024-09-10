@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Card, CardHeader, CardBody, Button } from "@material-tailwind/react";
 import { useDashBoard } from "./hooks/useDashBoard";
 import Task from "./components/Task";
+import AddTaskModal from "./components/AddTaskModal";
 
 export function DashBoard() {
-  const { addTask, renderTasksByStatus, handleDrop, allowDrop } = useDashBoard();
+  const { addTask, renderTasksByStatus, handleDrop, allowDrop, users } = useDashBoard();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpen = () => setIsModalOpen(!isModalOpen);
 
   return (
     <div className="mt-8 flex flex-col size-full">
@@ -13,7 +17,7 @@ export function DashBoard() {
         <CardHeader variant="gradient" color="indigo" className="relative mb-3 p-2">
           <div className="flex items-center justify-between mx-4">
             <Typography variant="h3" color="white" className="select-none">Tarefas</Typography>
-            <Button color="green" onClick={addTask}>Adicionar</Button>
+            <Button color="green" onClick={handleOpen}>Adicionar</Button>
           </div>
         </CardHeader>
 
@@ -40,6 +44,7 @@ export function DashBoard() {
         </CardBody>
 
       </Card>
+      <AddTaskModal open={isModalOpen} handleOpen={handleOpen} addTask={addTask} users={users} />
     </div>
   );
 }

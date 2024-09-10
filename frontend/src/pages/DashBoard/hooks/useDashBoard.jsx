@@ -1,56 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// Hook que gerencia as tarefas
 export const useDashBoard = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: 'Tarefa 1',
-      description: 'Descrição 1',
-      atribution: 'Usuario 1',
-      status: 0
-    },
-    {
-      id: 2,
-      title: 'Tarefa 2',
-      description: 'Descrição 2',
-      atribution: 'Usuario 1',
-      status: 1
-    },
-    {
-      id: 3,
-      title: 'Tarefa 3',
-      description: 'Descrição 3',
-      atribution: 'Usuario 1',
-      status: 2
-    },
-    {
-      id: 4,
-      title: 'Tarefa 4',
-      description: 'Descrição 4',
-      atribution: 'Usuario 2',
-      status: 1
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  // Função para buscar todas as tarefas do backend
+  const fetchTasks = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/tasks");
+      const data = await response.json();
+      console.log("", data);
+      setTasks(data); // Atualiza o estado com as tarefas vindas do backend
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+    }
+  };
+
+  // Função para buscar todos os usuários do backend
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/users");
+      const data = await response.json();
+      setUsers(data); // Atualiza o estado com os usuários vindos do backend
+    } catch (error) {
+      console.error("Erro ao buscar usuários:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks(); // Carrega as tarefas quando o componente for montado
+    fetchUsers(); // Carrega os usuários quando o componente for montado
+  }, []);
 
   // Função para adicionar uma nova tarefa
-  const addTask = () => {
-    const newTask = {
-      id: tasks.length + 1,
-      title: `Tarefa ${tasks.length + 1}`,
-      description: "Nova tarefa",
-      atribution: "Novo usuário",
-      status: 0
-    };
-    setTasks([...tasks, newTask]);
+  const addTask = async (newTask) => {
+    try {
+      const response = await fetch("http://localhost:5000/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask),
+      });
+      const data = await response.json();
+      setTasks((prevTasks) => [...prevTasks, data]); // Adiciona a nova tarefa à lista
+    } catch (error) {
+      console.error("Erro ao adicionar tarefa:", error);
+    }
   };
 
   // Função para atualizar o status da tarefa
-  const updateTaskStatus = (taskId, newStatus) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, status: newStatus } : task
-    );
-    setTasks(updatedTasks);
+  const updateTaskStatus = async (taskId, newStatus) => {
+    try {
+      await fetch(`http://localhost:5000/tasks/${taskId}/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === taskId ? { ...task, status: newStatus } : task
+        )
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar o status da tarefa:", error);
+    }
   };
 
   // Função para filtrar tarefas por status
@@ -69,7 +85,7 @@ export const useDashBoard = () => {
         <TaskComponent
           title={task.title}
           description={task.description}
-          atribution={task.atribution}
+          atribution={task.user ? task.user.name : "Sem usuário"}
           status={task.status}
         />
       </div>
@@ -88,6 +104,8 @@ export const useDashBoard = () => {
   };
 
   return {
+    tasks,
+    users,
     addTask,
     renderTasksByStatus,
     handleDrop,
