@@ -8,6 +8,10 @@ const AddTaskModal = ({ open, handleOpen, addTask, users }) => {
     user_id: '',
   });
 
+  const handleClear = () => {
+    setFormData([])
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,8 +22,9 @@ const AddTaskModal = ({ open, handleOpen, addTask, users }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addTask(formData); // Adiciona a tarefa via a função passada como prop
-    handleOpen(); // Fecha o modal após o cadastro
+    await addTask(formData); 
+    handleOpen(); 
+    handleClear();
   };
 
   return (
