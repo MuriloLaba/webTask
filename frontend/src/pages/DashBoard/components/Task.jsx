@@ -6,9 +6,9 @@ export function Task({ title, description, atribution, status }) {
   const getStatusColor = (status) => {
     switch (status) {
       case 0:
-        return 'bg-blue-800'; 
+        return 'bg-gray-800'; 
       case 1:
-        return 'bg-yellow-800'; 
+        return 'bg-blue-800'; 
       case 2:
         return 'bg-green-500'; 
       default:
