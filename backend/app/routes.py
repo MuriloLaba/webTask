@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from .models import User
+from .models import User, Task
 from . import db
 
 main = Blueprint('main', __name__)
@@ -42,3 +42,19 @@ def login():
         return jsonify({"message": "Login bem-sucedido!"})
     else:
         return jsonify({"error": "Credenciais inválidas!"}), 401
+
+
+@main.route('/tasks', methods=['POST'])
+def create_task():
+    data = request.json
+    new_task = Task(
+        title=data['title'],
+        description=data.get('description', ''),
+        status=data.get('status', 'Pendente'),
+        user_id=data['user_id']  # Associa a tarefa a um usuário específico
+    )
+    
+    db.session.add(new_task)
+    db.session.commit()
+
+    return jsonify({"message": "Tarefa criada com sucesso!"}), 201
