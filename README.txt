@@ -94,7 +94,7 @@ Permite excluir uma tarefa específica com base no seu ID.
 
 ## Rotas da API
 
-### 1. **/register** - [POST]
+1./register - [POST]
 Registra um novo usuário no sistema.
 
 - **Parâmetros** (JSON):
@@ -106,7 +106,7 @@ Registra um novo usuário no sistema.
   - `400`: Usuário já existe.
   - `500`: Erro no servidor.
 
-### 2. **/login** - [POST]
+2./login - [POST]
 Realiza login de um usuário.
 
 - **Parâmetros** (JSON):
@@ -116,21 +116,21 @@ Realiza login de um usuário.
   - `200`: Login bem-sucedido.
   - `401`: Credenciais inválidas.
 
-### 3. **/users** - [GET]
+3./users - [GET]
 Retorna a lista de todos os usuários cadastrados.
 
 - **Respostas**:
   - `200`: Lista de usuários com `id` e `name`.
   - `500`: Erro no servidor.
 
-### 4. **/tasks** - [GET]
+4./tasks - [GET]
 Retorna a lista de todas as tarefas.
 
 - **Respostas**:
   - `200`: Lista de tarefas com detalhes como `id`, `title`, `description`, `status`, e informações do usuário.
   - `500`: Erro no servidor.
 
-### 5. **/tasks** - [POST]
+5./tasks - [POST]
 Cria uma nova tarefa para um usuário.
 
 - **Parâmetros** (JSON):
@@ -142,7 +142,7 @@ Cria uma nova tarefa para um usuário.
   - `201`: Tarefa criada com sucesso.
   - `500`: Erro no servidor.
 
-### 6. **/tasks/<int:task_id>** - [DELETE]
+6./tasks/<int:task_id> - [DELETE]
 Exclui uma tarefa existente com base no seu ID.
 
 - **Parâmetros**: ID da tarefa na URL.
@@ -151,7 +151,7 @@ Exclui uma tarefa existente com base no seu ID.
   - `404`: Tarefa não encontrada.
   - `500`: Erro no servidor.
 
-### 7. **/tasks/<int:task_id>/status** - [PUT]
+7./tasks/<int:task_id>/status - [PUT]
 Atualiza o status de uma tarefa.
 
 - **Parâmetros** (JSON):
@@ -161,7 +161,7 @@ Atualiza o status de uma tarefa.
   - `404`: Tarefa não encontrada.
   - `500`: Erro no servidor.
 
-### 8. **/tasks/<int:task_id>/title** - [PUT]
+8./tasks/<int:task_id>/title - [PUT]
 Atualiza o título de uma tarefa.
 
 - **Parâmetros** (JSON):
@@ -171,7 +171,7 @@ Atualiza o título de uma tarefa.
   - `404`: Tarefa não encontrada.
   - `500`: Erro no servidor.
 
-### 9. **/tasks/<int:task_id>/description** - [PUT]
+9./tasks/<int:task_id>/description - [PUT]
 Atualiza a descrição de uma tarefa.
 
 - **Parâmetros** (JSON):
@@ -181,7 +181,7 @@ Atualiza a descrição de uma tarefa.
   - `404`: Tarefa não encontrada.
   - `500`: Erro no servidor.
 
-### 10. **/tasks/<int:task_id>/user** - [PUT]
+10./tasks/<int:task_id>/user - [PUT]
 Atualiza o usuário associado a uma tarefa.
 
 - **Parâmetros** (JSON):
@@ -191,13 +191,7 @@ Atualiza o usuário associado a uma tarefa.
   - `404`: Tarefa ou usuário não encontrado.
   - `500`: Erro no servidor.
 
-## Considerações Finais
-
-Este sistema fornece um conjunto básico de operações para a criação e gerenciamento de usuários e suas respectivas tarefas. Cada rota é projetada para ser simples e clara, com tratamento básico de erros para facilitar a depuração e a utilização da API.
-
 ### Dependências
 
 - Flask
 - Flask SQLAlchemy
-
-Este projeto pode ser facilmente expandido para incluir funcionalidades adicionais, como autenticação de tokens (JWT), melhorias na segurança do armazenamento de senhas (ex: bcrypt) e novos recursos de gerenciamento de tarefas.
